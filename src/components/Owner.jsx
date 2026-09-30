@@ -61,8 +61,8 @@ export default function Owner({ onReceipt }) {
           <div className="owner-frame">
             <img className="portrait-night" src={img('owner-studio-suit.webp')} width="1086" height="1448" loading="lazy"
               alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" />
-            <img className="portrait-day" src={img('owner-white-suit.webp')} width="1024" height="1536" loading="lazy"
-              alt="Thuvarakan wearing glasses and a white suit with a white shirt, hands in pockets" />
+            <img className="portrait-day" src={img('owner-day-portrait.webp')} width="1024" height="1536" loading="lazy"
+              alt="Thuvarakan wearing glasses, a charcoal suit and a white shirt, hands in pockets" />
           </div>
           <div className="owner-badge">
             <span className="badge-dot" aria-hidden="true" />

@@ -4,21 +4,6 @@ import { careerShelves } from '../data.js';
 
 const TOTAL = careerShelves.length;
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-// Small fixed wobble per crate so the stack looks hand-placed, not gridded.
-const TILTS = [-2.2, 1.6, -1.1, 2.4, -1.8, 1.2];
-// One vivid colour pair per crate: [base, deep].
-const COLORS = [['#ff7a45','#e5482a'],['#ffc233','#f29b00'],['#35d0c0','#12968f'],['#5b8cff','#3358e0'],['#c765ff','#8f3bd6'],['#ff5c9a','#e02a6f']];
-const DROPS = [-14, 9, -6, 12, -10, 7];
-
-function Barcode({ seed }) {
-  const bars = Array.from({ length: 22 }, (_, i) => ((seed * 7 + i * 13) % 5) + 1);
-  return (
-    <span className="barcode" aria-hidden="true">
-      {bars.map((w, i) => <i key={i} style={{ width: w }} />)}
-    </span>
-  );
-}
-
 export default function CareerShelves({ paused }) {
   const trackRef = useRef(null);
   const [landed, setLanded] = useState(0);
@@ -64,26 +49,15 @@ export default function CareerShelves({ paused }) {
   const selectedIdx = landed === 0 ? null : picked !== null && picked < landed ? picked : landed - 1;
   const sel = selectedIdx === null ? null : careerShelves[selectedIdx];
 
-  const tilt = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-    e.currentTarget.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-  };
-  const untilt = (e) => {
-    e.currentTarget.style.setProperty('--mx', 0);
-    e.currentTarget.style.setProperty('--my', 0);
-  };
-
   return (
     <section className="career-stock stockroom" id="story" aria-labelledby="story-title">
       <div className="stock-track" ref={trackRef}>
         <div className="stock-sticky">
-          <div className="stock-side" style={{ '--sel': COLORS[selectedIdx ?? 0][0], '--sel-deep': COLORS[selectedIdx ?? 0][1] }}>
+          <div className="stock-side">
             <span className="eyebrow">02 / HOW THE SHELVES FILLED UP</span>
-            <h2 id="story-title">Fresh stock,<br />every <em>chapter.</em></h2>
+            <h2 id="story-title">Six chapters.<br /><em>One shop.</em></h2>
             <div className="delivery" aria-hidden="true">
-              <span>DELIVERY</span>
-              <b>{String(landed).padStart(2, '0')}<small> / 0{TOTAL}</small></b>
+              <span>{String(landed).padStart(2, '0')} / 0{TOTAL}</span>
               <div className="delivery-bar"><i style={{ width: `${(landed / TOTAL) * 100}%` }} /></div>
             </div>
 
@@ -102,7 +76,6 @@ export default function CareerShelves({ paused }) {
                     <dt>Brought forward</dt><dd>{sel.forward}</dd>
                   </dl>
                   <div className="price-tag"><span>ADDED TO THE STORE</span><strong>{sel.takeaway}</strong></div>
-                  <Barcode seed={Number(sel.n)} />
                 </div>
               ) : (
                 <p className="detail-empty">The shelves are empty. Keep scrolling. A delivery is on its way.</p>
@@ -114,36 +87,26 @@ export default function CareerShelves({ paused }) {
             {careerShelves.map((s, i) => {
               const isLanded = i < landed;
               return (
-                <div className="slot" key={s.n}>
-                  <span className="slot-ghost" aria-hidden="true">{s.n}</span>
-                  <button
-                    type="button"
-                    className={`crate${isLanded ? ' landed' : ''}${selectedIdx === i ? ' selected' : ''}${s.current ? ' is-now' : ''}`}
-                    style={{ '--tilt': `${TILTS[i]}deg`, '--drift': `${DROPS[i]}px`, '--c1': COLORS[i][0], '--c2': COLORS[i][1] }}
-                    disabled={!isLanded}
-                    tabIndex={isLanded ? 0 : -1}
-                    aria-hidden={!isLanded}
-                    aria-pressed={selectedIdx === i}
-                    aria-label={`Shelf ${s.n}: ${s.role}, ${s.company}`}
-                    onClick={() => setPicked(i)}
-                    onPointerMove={tilt}
-                    onPointerLeave={untilt}
-                  >
-                    <span className="crate-body">
-                      <span className="tape" aria-hidden="true" />
-                      <span className="scan" aria-hidden="true" />
-                      <span className="burst" aria-hidden="true" />
-                      <span className="crate-n">{s.n}</span>
-                      <span className="crate-label">
-                        <span className="crate-period">{s.period}</span>
-                        <span className="crate-role">{s.role}</span>
-                        <span className="crate-company">{s.company}</span>
-                      </span>
-                      <span className="crate-stamp" aria-hidden="true">{s.takeaway}</span>
-                      {s.current && <span className="crate-now" aria-hidden="true">NOW</span>}
-                    </span>
-                  </button>
-                </div>
+                <button
+                  key={s.n}
+                  type="button"
+                  className={`card${isLanded ? ' landed' : ''}${selectedIdx === i ? ' selected' : ''}`}
+                  disabled={!isLanded}
+                  tabIndex={isLanded ? 0 : -1}
+                  aria-hidden={!isLanded}
+                  aria-pressed={selectedIdx === i}
+                  aria-label={`Shelf ${s.n}: ${s.role}, ${s.company}`}
+                  onClick={() => setPicked(i)}
+                >
+                  <span className="card-top">
+                    <span className="card-n">{s.n}</span>
+                    {s.current ? <span className="card-now">NOW</span> : <span className="card-period">{s.period}</span>}
+                  </span>
+                  <span className="card-bottom">
+                    <span className="card-role">{s.role}</span>
+                    <span className="card-company">{s.company}</span>
+                  </span>
+                </button>
               );
             })}
           </div>

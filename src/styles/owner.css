@@ -109,3 +109,5 @@
 @media(max-width:900px){.owner-stamp{width:124px;height:124px;right:0;top:-26px}}
 .owner-stamp{width:210px;height:210px;right:-16px;top:-44px}
 @media(max-width:900px){.owner-stamp{width:150px;height:150px;top:-30px}}
+.owner-stamp{background:transparent;border-radius:0}
+@media(min-width:901px){.owner-stamp{right:-64px;top:-56px}}

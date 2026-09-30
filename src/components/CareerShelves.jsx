@@ -62,22 +62,6 @@ export default function CareerShelves({ paused }) {
           <div className="stock-side">
             <span className="eyebrow">02 / HOW THE SHELVES FILLED UP</span>
             <h2 id="story-title">Six chapters.<br /><em>One shop.</em></h2>
-            <div className="rail" role="group" aria-label="Career timeline">
-              <span className="rail-line" aria-hidden="true"><i style={{ width: `${selectedIdx === null ? 0 : (selectedIdx / (TOTAL - 1)) * 100}%` }} /></span>
-              {careerShelves.map((c, i) => (
-                <button
-                  key={c.n}
-                  type="button"
-                  className={`rail-dot${i <= (selectedIdx ?? -1) ? ' reached' : ''}${selectedIdx === i ? ' active' : ''}`}
-                  disabled={i >= landed}
-                  onClick={() => setPicked(i)}
-                  aria-label={`Go to shelf ${c.n}: ${c.role}`}
-                >
-                  <span className="rail-year">{c.year}</span>
-                </button>
-              ))}
-            </div>
-
             <div className="stock-detail" aria-live="polite">
               {/* every role is rendered in the same cell so the panel keeps the height of the tallest one */}
               {careerShelves.map((c, i) => (

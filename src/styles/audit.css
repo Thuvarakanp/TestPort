@@ -33,3 +33,12 @@
 .store-contact .availability{color:#f6a66e}
 .store-contact a:hover{color:#f6a66e;border-color:#f6a66e}
 @media(max-width:700px){.store-contact{padding-bottom:150px}}
+
+/* one shared content width: owner section follows the same 6% gutters as every other section */
+.owner-grid,.owner-ticket{max-width:none}
+
+/* contact: keep the email on one line and let the intro text give way */
+.contact-line .direct-contact a{white-space:nowrap;font-size:clamp(17px,2.1vw,28px)}
+.contact-line .direct-contact{flex:none}
+.contact-line>div:first-child{min-width:0}
+@media(max-width:700px){.contact-line .direct-contact a{white-space:normal;overflow-wrap:anywhere;font-size:21px}}

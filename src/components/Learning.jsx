@@ -41,7 +41,7 @@ export default function Learning() {
           <Reveal className="ln-card ln-community">
             <div className="ln-card-head"><span className="eyebrow">COMMUNITY</span></div>
             <h3>A shared interest in building.</h3>
-            <span className="ln-tag">Volunteer · Yarl IT Hub · 2015 – present</span>
+            <span className="ln-tag">Volunteer · since 2015</span>
             <p>Yarl IT Hub is a not-for-profit social enterprise inspiring, supporting and nurturing technology, innovation and entrepreneurship in the community. I’ve volunteered with them since 2015. It connects closely with my own ambition to build a business.</p>
           </Reveal>
 

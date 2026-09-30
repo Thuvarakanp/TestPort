@@ -47,7 +47,6 @@ export default function CareerShelves({ paused }) {
   useEffect(() => setPicked(null), [landed]);
 
   const selectedIdx = landed === 0 ? null : picked !== null && picked < landed ? picked : landed - 1;
-  const sel = selectedIdx === null ? null : careerShelves[selectedIdx];
 
   return (
     <section className="career-stock stockroom" id="story" aria-labelledby="story-title">
@@ -80,28 +79,27 @@ export default function CareerShelves({ paused }) {
             </div>
 
             <div className="stock-detail" aria-live="polite">
-              {sel ? (
-                <div key={sel.n} className="stock-detail-inner">
-                  <span className="detail-ghost" aria-hidden="true">{sel.n}</span>
+              {/* every role is rendered in the same cell so the panel keeps the height of the tallest one */}
+              {careerShelves.map((c, i) => (
+                <div key={c.n} className={`stock-detail-inner${selectedIdx === i ? ' is-sel' : ''}`} aria-hidden={selectedIdx !== i}>
                   <div className="detail-head">
-                    <span>SHELF {sel.n} · {sel.period}{sel.current && <em className="now-label">CURRENT</em>}</span>
+                    <span>SHELF {c.n} · {c.period}{c.current && <em className="now-label">CURRENT</em>}</span>
                     <span className="detail-nav">
-                      <button type="button" onClick={() => setPicked(selectedIdx - 1)} disabled={selectedIdx === 0} aria-label="Previous shelf">←</button>
-                      <button type="button" onClick={() => setPicked(selectedIdx + 1)} disabled={selectedIdx >= landed - 1} aria-label="Next shelf">→</button>
+                      <button type="button" tabIndex={selectedIdx === i ? 0 : -1} onClick={() => setPicked(i - 1)} disabled={i === 0} aria-label="Previous shelf">←</button>
+                      <button type="button" tabIndex={selectedIdx === i ? 0 : -1} onClick={() => setPicked(i + 1)} disabled={i >= landed - 1} aria-label="Next shelf">→</button>
                     </span>
                   </div>
-                  <h3>{sel.role}</h3>
-                  <p className="detail-company">{sel.company}</p>
-                  <p className="detail-title">“{sel.title}”</p>
+                  <h3>{c.role}</h3>
+                  <p className="detail-company">{c.company}</p>
+                  <p className="detail-title">“{c.title}”</p>
                   <dl>
-                    <dt>On the job</dt><dd>{sel.job}</dd>
-                    <dt>Brought forward</dt><dd>{sel.forward}</dd>
+                    <dt>On the job</dt><dd>{c.job}</dd>
+                    <dt>Brought forward</dt><dd>{c.forward}</dd>
                   </dl>
-                  <div className="price-tag"><span>ADDED TO THE STORE</span><strong>{sel.takeaway}</strong></div>
+                  <div className="price-tag"><span>ADDED TO THE STORE</span><strong>{c.takeaway}</strong></div>
                 </div>
-              ) : (
-                <p className="detail-empty">The shelves are empty. Keep scrolling. A delivery is on its way.</p>
-              )}
+              ))}
+              <p className={`detail-empty${selectedIdx === null ? ' is-sel' : ''}`} aria-hidden={selectedIdx !== null}>The shelves are empty. Keep scrolling. A delivery is on its way.</p>
             </div>
           </div>
 

@@ -53,6 +53,11 @@ export default function Owner({ onReceipt }) {
     <section className="owner" id="about" aria-labelledby="owner-title">
       <div className="owner-grid">
         <Reveal className="owner-photo">
+          <svg className="owner-stamp" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="stamp-circle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
+            <text><textPath href="#stamp-circle">DESIGN ✳ CODE ✳ QA ✳ DESIGN ✳ CODE ✳ QA ✳</textPath></text>
+            <circle cx="60" cy="60" r="6" />
+          </svg>
           <div className="owner-frame">
             <img src={img('owner-studio-suit.webp')} width="1086" height="1448" loading="lazy"
               alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" />

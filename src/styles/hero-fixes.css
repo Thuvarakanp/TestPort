@@ -1,0 +1,43 @@
+/* Hero alignment pass: one shared gutter, readable overlays, nothing hidden by the fixed controls. */
+:root{--gutter:6%;--scrim:#070b09e6;--pill-bg:#0b120bcc;--pill-border:#cdd7bc38}
+:root[data-shop="day"]{--scrim:#fbfaf6f0;--pill-bg:#fcfcf2e8;--pill-border:#63765360}
+
+.entrance-nav{padding:24px var(--gutter)}
+.entrance-caption{left:var(--gutter);right:var(--gutter);top:112px;justify-content:space-between;align-items:flex-start}
+.closed-copy,.owner-welcome{left:var(--gutter);right:auto;bottom:18%}
+.entrance-bottom{left:var(--gutter);right:var(--gutter);bottom:92px}
+
+/* status + caption share one pill style so they line up on both edges */
+.entrance-caption>.eyebrow{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;background:var(--pill-bg);border:1px solid var(--pill-border);
+  border-radius:2px;padding:9px 13px;font:12px monospace;letter-spacing:.06em;line-height:1}
+.entrance-caption>.eyebrow .shop-caption{padding-left:12px;border-left:1px solid var(--pill-border);opacity:.85}
+.scene-status{line-height:1}
+
+/* soft scrim so text over busy shelves stays legible */
+.closed-copy,.owner-welcome{isolation:isolate}
+.closed-copy::before,.owner-welcome::before{content:"";position:absolute;z-index:-1;inset:-90px -200px -50px -80px;
+  background:radial-gradient(ellipse 80% 78% at 30% 55%,var(--scrim) 30%,transparent 74%);pointer-events:none}
+.closed-copy{max-width:min(880px,90vw)}
+.closed-copy h1{margin:14px 0 16px}
+.closed-copy .eyebrow,.owner-welcome .eyebrow{font-size:12px;letter-spacing:.08em}
+
+/* day theme: brand was pale on a pale sky */
+:root[data-shop="day"] .entrance-nav .brand>span:first-child{color:#19392e}
+:root[data-shop="day"] .entrance-nav nav a{color:#19392e;font-weight:600}
+
+@media(max-width:900px){
+  .entrance-caption>.eyebrow{display:none}
+  .entrance-caption{justify-content:flex-end}
+  .closed-copy,.owner-welcome{right:var(--gutter);max-width:none;bottom:22%}
+  .closed-copy::before,.owner-welcome::before{inset:-40px -20px -30px -20px}
+}
+@media(max-width:700px){
+  .entrance-bottom{bottom:126px}
+  .entrance-caption{top:96px}
+}
+@media(max-height:640px){
+  .entrance-bottom{bottom:78px}.closed-copy,.owner-welcome{bottom:22%}
+}
+
+/* keep the fixed switch / motion controls from covering the footer line */
+.store-contact{padding-bottom:120px}

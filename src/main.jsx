@@ -6,6 +6,7 @@ import './styles/midnight.css';
 import './styles/entrance.css';
 import './styles/shop-theme.css';
 import './styles/stockroom.css';
+import './styles/hero-fixes.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

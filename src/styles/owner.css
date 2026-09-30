@@ -100,3 +100,13 @@
 .owner-badge{left:18px;bottom:-18px}
 @media(max-width:900px){.owner-frame{aspect-ratio:3/2}.owner-badge{left:12px;bottom:-22px}}
 @media(max-width:900px){.owner-grid{grid-template-columns:1fr}}
+
+/* transparent collage: no card, it sits directly on the section background */
+.owner-frame{background:transparent!important;box-shadow:none!important;border-radius:0;overflow:visible}
+.owner-frame img{object-fit:contain}
+.collage-night{display:none}
+:root:not([data-shop="day"]) .collage-day{display:none}
+:root:not([data-shop="day"]) .collage-night{display:block}
+.owner-badge{left:8%;bottom:4%}
+@media(max-width:900px){.owner-badge{left:4%;bottom:-6px}}
+@media(max-width:900px){.owner-photo{margin-bottom:34px}.owner-badge{left:4%;bottom:-34px}}

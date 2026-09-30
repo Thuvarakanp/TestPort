@@ -69,24 +69,25 @@
 }
 .crate-body{position:absolute;inset:0;display:block;border-radius:5px;padding:14px 14px 12px;box-sizing:border-box;overflow:hidden;
   background:
-    repeating-linear-gradient(90deg,transparent 0 46px,#0000000d 46px 47px),
-    linear-gradient(160deg,var(--sr-crate),var(--sr-crate-dark));
-  box-shadow:inset 0 0 0 2px #0000001a,0 14px 22px -10px #000a;
+    repeating-linear-gradient(90deg,transparent 0 46px,#0000000f 46px 47px),
+    linear-gradient(200deg,#ffffff40 0,transparent 35%),
+    linear-gradient(160deg,var(--c1),var(--c2));
+  box-shadow:inset 0 0 0 2px #ffffff30,0 16px 26px -10px var(--c2);
   transform:rotateY(calc(var(--mx,0) * 14deg)) rotateX(calc(var(--my,0) * -14deg));
   transition:transform .18s ease-out,box-shadow .25s;color:var(--sr-paper-ink)}
-.crate:hover .crate-body{box-shadow:inset 0 0 0 2px #0000001a,0 22px 30px -10px #000b}
-.crate.selected .crate-body{outline:3px solid var(--sr-accent);outline-offset:3px}
+.crate:hover .crate-body{box-shadow:inset 0 0 0 2px #ffffff50,0 26px 36px -10px var(--c2)}
+.crate.selected .crate-body{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px var(--c1),0 0 40px 6px var(--c1)}
 .crate.selected{z-index:2}
-.tape{position:absolute;top:0;left:50%;width:44px;height:100%;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#ffffff30,transparent),var(--sr-tape);opacity:.88}
+.tape{position:absolute;top:0;left:50%;width:34px;height:100%;transform:translateX(-50%);background:repeating-linear-gradient(-45deg,#ffffffd0 0 8px,#ffffff90 8px 16px);opacity:.55}
 .crate-n{position:absolute;top:8px;left:10px;font:800 14px ui-monospace,monospace;color:#fff;mix-blend-mode:normal;text-shadow:0 1px 0 #0006;z-index:1;background:#0006;padding:1px 6px;border-radius:3px}
 .crate-label{position:absolute;left:10px;right:10px;bottom:34px;background:var(--sr-paper);padding:7px 9px;border-radius:2px;display:flex;flex-direction:column;gap:1px;
   box-shadow:0 2px 0 #0002;transform:rotate(-1deg)}
 .crate-period{font:10px ui-monospace,monospace;letter-spacing:.1em;color:#6b6450}
 .crate-role{font:800 clamp(12px,1.25vw,16px)/1.15 system-ui,sans-serif}
 .crate-company{font-size:10px;color:#5b5544}
-.crate-stamp{position:absolute;left:10px;bottom:8px;font:800 9px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#7a1f10;
-  border:2px solid #7a1f10;padding:3px 6px;border-radius:3px;transform:rotate(-3deg);opacity:.78;background:#f6efd933}
-.crate-now{position:absolute;top:8px;right:10px;font:800 10px ui-monospace,monospace;letter-spacing:.14em;background:var(--sr-accent);color:#fff;padding:3px 7px;border-radius:99px;animation:sr-pulse 1.6s infinite}
+.crate-stamp{position:absolute;left:10px;bottom:8px;font:800 9px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  border:2px solid #fff;padding:3px 6px;border-radius:3px;transform:rotate(-3deg);opacity:.95;background:#0003}
+.crate-now{position:absolute;top:8px;right:10px;font:800 10px ui-monospace,monospace;letter-spacing:.14em;background:#111;color:#fff;padding:3px 7px;border-radius:99px;animation:sr-pulse 1.6s infinite}
 @keyframes sr-pulse{50%{box-shadow:0 0 0 7px #f45b3500,0 0 0 0 #f45b35aa;transform:scale(1.08)}}
 /* barcode-scanner laser sweeps once when a crate lands */
 .scan{position:absolute;left:0;right:0;top:0;height:3px;background:#ff2d2d;box-shadow:0 0 14px 4px #ff2d2daa;opacity:0;z-index:2}
@@ -112,3 +113,43 @@
 .stockroom .ambition-note{padding:70px 6%}
 
 @media(min-width:901px) and (max-height:860px){.barcode{display:none}.detail-title{margin:8px 0 4px}.stock-detail h3{font-size:22px}.stock-detail dt{margin-top:6px}.price-tag{margin-top:10px}}
+
+/* ---- Colour pass: lit shop wall, neon-trimmed shelves, party landings ---- */
+.stockroom .stock-sticky{isolation:isolate}
+.stockroom .stock-sticky::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 55% at 68% 8%,#ffd27a55,transparent 70%),
+    radial-gradient(circle,color-mix(in srgb,var(--sr-ink) 14%,transparent) 1.4px,transparent 1.6px) 0 0/26px 26px;}
+:root[data-shop="day"] .stockroom .stock-sticky::before{background:
+    radial-gradient(ellipse 60% 55% at 68% 8%,#ffd27a99,transparent 70%),
+    radial-gradient(circle,#a9472333 1.4px,transparent 1.6px) 0 0/26px 26px,
+    linear-gradient(#fff6e2,#fbfaf6);}
+.stock-shelf{padding:28px clamp(14px,2vw,30px) 16px;border-radius:18px;border:2px solid color-mix(in srgb,var(--sr-line) 80%,transparent);
+  background:linear-gradient(180deg,#0b1a2e,#12223a);box-shadow:inset 0 0 60px #000a,0 30px 60px -30px #000c}
+:root[data-shop="day"] .stock-shelf{background:linear-gradient(180deg,#fff0cf,#ffe2ad);border-color:#c9a466;box-shadow:inset 0 0 40px #b8874a44,0 30px 50px -28px #6b451f88}
+.slot::after{background:linear-gradient(#ffd27a,#c98a3c);box-shadow:0 0 22px 2px #ffb70355,0 10px 18px -8px #0009}
+.slot-ghost{-webkit-text-stroke:2px color-mix(in srgb,var(--sr-accent) 55%,transparent)}
+.stock-side h2{font-size:clamp(34px,3.8vw,60px)}
+.stock-side h2 em{background:linear-gradient(transparent 62%,color-mix(in srgb,var(--sr-accent) 35%,transparent) 62% 92%,transparent 92%);padding:0 .08em;color:var(--sr-ink)}
+.delivery-bar{height:10px}
+.delivery-bar i{background:linear-gradient(90deg,#ff7a45,#ffc233,#35d0c0,#5b8cff,#c765ff,#ff5c9a);background-size:320px 100%}
+.stock-detail{border:2px solid var(--sel);box-shadow:8px 8px 0 var(--sel-deep),0 24px 40px -24px #0008;transition:border-color .4s,box-shadow .4s}
+.stock-detail::before{display:none}
+.stock-detail h3{display:inline-block;background:var(--sel);color:#fff;padding:2px 10px;margin-left:-10px;transform:rotate(-1.2deg);box-shadow:3px 3px 0 var(--sel-deep)}
+.detail-head span:first-child{color:var(--sel-deep);font-weight:700}
+.detail-title{color:var(--sel-deep)}
+:root:not([data-shop="day"]) .detail-title{color:var(--sel)}
+.price-tag{border:0;background:var(--sel);color:#fff;padding:9px 12px;border-radius:6px;transform:rotate(-1deg);box-shadow:3px 3px 0 var(--sel-deep)}
+.price-tag span{color:#ffffffcc}.price-tag strong{color:#fff}
+.stock-detail-inner{border-image:none}
+.crate-n{background:#111a;text-shadow:none}
+.crate-period,.crate-company{color:#4a4436}
+.crate-role{color:#1a160c}
+/* confetti burst on landing */
+.burst{position:absolute;left:50%;top:100%;width:8px;height:8px;border-radius:50%;pointer-events:none;opacity:0;z-index:3;
+  box-shadow:-60px -6px 0 #ffc233,-38px -26px 0 #35d0c0,-12px -40px 0 #ff5c9a,18px -34px 0 #5b8cff,46px -22px 0 #c765ff,66px -4px 0 #ff7a45,-74px 6px 0 #fff,74px 8px 0 #fff}
+.crate.landed .burst{animation:sr-burst .7s .55s ease-out both}
+@keyframes sr-burst{0%{opacity:1;transform:translate(-50%,0) scale(.2)}100%{opacity:0;transform:translate(-50%,-30px) scale(1.7)}}
+.paused .crate.landed .burst{animation:none}
+@media(max-width:900px){.stock-shelf{padding:18px 12px 8px}.crate.landed .burst{animation:none}}
+@media(prefers-reduced-motion:reduce){.crate.landed .burst{animation:none}}

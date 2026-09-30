@@ -6,6 +6,8 @@ const TOTAL = careerShelves.length;
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 // Small fixed wobble per crate so the stack looks hand-placed, not gridded.
 const TILTS = [-2.2, 1.6, -1.1, 2.4, -1.8, 1.2];
+// One vivid colour pair per crate: [base, deep].
+const COLORS = [['#ff7a45','#e5482a'],['#ffc233','#f29b00'],['#35d0c0','#12968f'],['#5b8cff','#3358e0'],['#c765ff','#8f3bd6'],['#ff5c9a','#e02a6f']];
 const DROPS = [-14, 9, -6, 12, -10, 7];
 
 function Barcode({ seed }) {
@@ -76,7 +78,7 @@ export default function CareerShelves({ paused }) {
     <section className="career-stock stockroom" id="story" aria-labelledby="story-title">
       <div className="stock-track" ref={trackRef}>
         <div className="stock-sticky">
-          <div className="stock-side">
+          <div className="stock-side" style={{ '--sel': COLORS[selectedIdx ?? 0][0], '--sel-deep': COLORS[selectedIdx ?? 0][1] }}>
             <span className="eyebrow">02 / HOW THE SHELVES FILLED UP</span>
             <h2 id="story-title">Fresh stock,<br />every <em>chapter.</em></h2>
             <div className="delivery" aria-hidden="true">
@@ -117,7 +119,7 @@ export default function CareerShelves({ paused }) {
                   <button
                     type="button"
                     className={`crate${isLanded ? ' landed' : ''}${selectedIdx === i ? ' selected' : ''}${s.current ? ' is-now' : ''}`}
-                    style={{ '--tilt': `${TILTS[i]}deg`, '--drift': `${DROPS[i]}px` }}
+                    style={{ '--tilt': `${TILTS[i]}deg`, '--drift': `${DROPS[i]}px`, '--c1': COLORS[i][0], '--c2': COLORS[i][1] }}
                     disabled={!isLanded}
                     tabIndex={isLanded ? 0 : -1}
                     aria-hidden={!isLanded}
@@ -130,6 +132,7 @@ export default function CareerShelves({ paused }) {
                     <span className="crate-body">
                       <span className="tape" aria-hidden="true" />
                       <span className="scan" aria-hidden="true" />
+                      <span className="burst" aria-hidden="true" />
                       <span className="crate-n">{s.n}</span>
                       <span className="crate-label">
                         <span className="crate-period">{s.period}</span>

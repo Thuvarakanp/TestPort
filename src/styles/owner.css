@@ -111,3 +111,10 @@
 @media(max-width:900px){.owner-stamp{width:150px;height:150px;top:-30px}}
 .owner-stamp{background:transparent;border-radius:0}
 @media(min-width:901px){.owner-stamp{right:-64px;top:-56px}}
+
+/* Day theme uses the white-suit portrait; its white backdrop multiplies into the page colour */
+.portrait-day{display:none}
+:root[data-shop="day"] .portrait-night{display:none}
+:root[data-shop="day"] .portrait-day{display:block;object-position:50% 14%;
+  -webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 44%,#000 55%,#000a 72%,transparent 100%);
+  mask-image:radial-gradient(ellipse 58% 62% at 50% 44%,#000 55%,#000a 72%,transparent 100%)}

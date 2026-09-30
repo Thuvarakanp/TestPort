@@ -59,8 +59,10 @@ export default function Owner({ onReceipt }) {
             <circle cx="60" cy="60" r="6" />
           </svg>
           <div className="owner-frame">
-            <img src={img('owner-studio-suit.webp')} width="1086" height="1448" loading="lazy"
+            <img className="portrait-night" src={img('owner-studio-suit.webp')} width="1086" height="1448" loading="lazy"
               alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" />
+            <img className="portrait-day" src={img('owner-white-suit.webp')} width="1024" height="1536" loading="lazy"
+              alt="Thuvarakan wearing glasses and a white suit with a white shirt, hands in pockets" />
           </div>
           <div className="owner-badge">
             <span className="badge-dot" aria-hidden="true" />

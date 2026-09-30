@@ -123,7 +123,6 @@ export default function CareerShelves({ paused }) {
       <Reveal className="ambition-note">
         <span className="eyebrow">STILL MAKING ROOM FOR WHAT’S NEXT</span>
         <p>Every skill has a place.<br />The dream is to <em>build something of my own.</em></p>
-        <span className="ambition-signature">Thuvarakan</span>
       </Reveal>
     </section>
   );

@@ -17,7 +17,6 @@ function initialTheme() {
 
 export default function App() {
   const [theme, setTheme] = useState(initialTheme);
-  const [paused, setPaused] = useState(false);
   const [project, setProject] = useState(null);
   const [receipt, setReceipt] = useState(false);
   const [ringText, setRingText] = useState('Ring for assistance ◉');
@@ -26,11 +25,6 @@ export default function App() {
     document.documentElement.dataset.shop = theme;
   }, [theme]);
 
-  useEffect(() => {
-    document.body.classList.toggle('paused', paused);
-    return () => document.body.classList.remove('paused');
-  }, [paused]);
-
   const chooseTheme = (t) => {
     setTheme(t);
     try { localStorage.setItem(STORAGE_KEY, t); } catch {}
@@ -38,7 +32,7 @@ export default function App() {
 
   const ring = () => {
     setRingText('Ding! You have my attention.');
-    document.querySelector('#contact')?.scrollIntoView({ behavior: paused ? 'instant' : 'smooth' });
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -51,7 +45,7 @@ export default function App() {
       </header>
 
       <main>
-        <Entrance theme={theme} paused={paused} />
+        <Entrance theme={theme} />
 
         <section className="inside-note">
           <span className="eyebrow">01 / COME ON IN</span>
@@ -68,7 +62,7 @@ export default function App() {
           </div>
         </div>
 
-        <CareerShelves paused={paused} />
+        <CareerShelves />
 
         <section className="stock" id="work">
           <Reveal className="section-heading">
@@ -158,7 +152,6 @@ export default function App() {
       </div>
       <div className="floating-note">
         <a className="replay-entry" href="#entrance">Replay entrance ↺</a>
-        <button className="motion-toggle" aria-pressed={paused} onClick={() => setPaused((p) => !p)}>Motion: {paused ? 'off' : 'on'}</button>
       </div>
 
       <ProjectDialog projectId={project} theme={theme} onClose={() => setProject(null)} />

@@ -14,7 +14,7 @@ function Scene({ cls, base, closed }) {
   );
 }
 
-export default function Entrance({ theme, paused }) {
+export default function Entrance({ theme }) {
   const sectionRef = useRef(null);
   const stageRef = useRef(null);
   const [ready, setReady] = useState(false);
@@ -36,7 +36,7 @@ export default function Entrance({ theme, paused }) {
 
     function render() {
       pending = false;
-      const staticMode = reduced.matches || paused;
+      const staticMode = reduced.matches;
       document.body.classList.toggle('entrance-static', staticMode);
       const distance = entrance.offsetHeight - innerHeight;
       const p = staticMode ? 1 : clamp(-entrance.getBoundingClientRect().top / Math.max(distance, 1));
@@ -70,7 +70,7 @@ export default function Entrance({ theme, paused }) {
       reduced.removeEventListener('change', schedule);
       document.body.classList.remove('entrance-static');
     };
-  }, [paused]);
+  }, []);
 
   return (
     <section className="entrance" id="entrance" ref={sectionRef} aria-label="Scroll to open the store and meet your host">

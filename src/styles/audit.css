@@ -42,3 +42,6 @@
 .contact-line .direct-contact{flex:none}
 .contact-line>div:first-child{min-width:0}
 @media(max-width:700px){.contact-line .direct-contact a{white-space:normal;overflow-wrap:anywhere;font-size:21px}}
+
+/* the floating note now holds only the replay link */
+.immersive-store .floating-note .replay-entry{padding-right:0;border-right:0}

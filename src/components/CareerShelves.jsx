@@ -4,7 +4,7 @@ import { careerShelves } from '../data.js';
 
 const TOTAL = careerShelves.length;
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-export default function CareerShelves({ paused }) {
+export default function CareerShelves() {
   const trackRef = useRef(null);
   const [landed, setLanded] = useState(0);
   const [picked, setPicked] = useState(null);
@@ -17,7 +17,7 @@ export default function CareerShelves({ paused }) {
 
     function update() {
       pending = false;
-      if (reduced.matches || narrow.matches || paused) return setLanded(TOTAL);
+      if (reduced.matches || narrow.matches) return setLanded(TOTAL);
       const distance = track.offsetHeight - innerHeight;
       const p = clamp(-track.getBoundingClientRect().top / Math.max(distance, 1));
       // Crates arrive across the first ~85% of the pin; the rest is a hold.
@@ -41,7 +41,7 @@ export default function CareerShelves({ paused }) {
       reduced.removeEventListener('change', schedule);
       narrow.removeEventListener('change', schedule);
     };
-  }, [paused]);
+  }, []);
 
   // A new delivery arriving takes the spotlight back from a manual pick.
   useEffect(() => setPicked(null), [landed]);

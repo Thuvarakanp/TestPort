@@ -107,3 +107,5 @@
 @media(max-width:900px){.owner-stamp{right:4px;top:-18px;width:92px;height:92px}}
 .owner-stamp{width:168px;height:168px;right:-8px;top:-34px;padding:6px}
 @media(max-width:900px){.owner-stamp{width:124px;height:124px;right:0;top:-26px}}
+.owner-stamp{width:210px;height:210px;right:-16px;top:-44px}
+@media(max-width:900px){.owner-stamp{width:150px;height:150px;top:-30px}}

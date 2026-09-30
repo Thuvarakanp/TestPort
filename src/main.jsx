@@ -7,6 +7,7 @@ import './styles/entrance.css';
 import './styles/shop-theme.css';
 import './styles/stockroom.css';
 import './styles/hero-fixes.css';
+import './styles/owner.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

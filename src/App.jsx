@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import Reveal from './components/Reveal.jsx';
 import Entrance from './components/Entrance.jsx';
+import Owner from './components/Owner.jsx';
 import CareerShelves from './components/CareerShelves.jsx';
 import { ProjectDialog, ReceiptDialog } from './components/Dialogs.jsx';
-import { img, workCards, toolkit, receiptRows, socials } from './data.js';
+import { img, workCards, toolkit, socials } from './data.js';
 
 const STORAGE_KEY = 'thuvarakan-shop';
 
@@ -99,28 +100,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="counter" id="about">
-          <Reveal className="owner-portrait">
-            <div className="portrait-crop">
-              <img src={img('owner-studio-suit.webp')} alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" loading="lazy" />
-            </div>
-            <span className="eyebrow">THUVARAKAN PERINPANAYAGAM / JAFFNA, SRI LANKA</span>
-          </Reveal>
-          <Reveal>
-            <span className="eyebrow">04 / MEET THE OWNER</span>
-            <h2>QA engineer today.<br />Entrepreneur<br />in the making.</h2>
-            <p>I’m Thuvarakan Perinpanayagam, a QA engineer based in Jaffna, Sri Lanka, with a background in graphic design, UI engineering and UI/UX design. Design helps me spot where an experience feels wrong. Code helps me understand why. Testing brings both perspectives together.</p>
-            <p>I work across manual and automated testing, read source code to investigate defects, and document issues with clear steps and visual evidence. For small defects, I can also contribute the fix.</p>
-            <p>That’s why this portfolio is a store. Becoming an entrepreneur has been my ambition from the beginning. This is a small expression of that dream: a place of my own, with everything I’ve learned on the shelves.</p>
-          </Reveal>
-          <Reveal className="receipt-preview">
-            <div className="eyebrow" style={{ textAlign: 'center' }}>WHAT I’VE COLLECTED ALONG THE WAY</div>
-            <h3>THUVARAKAN’S STORE</h3>
-            {receiptRows.map(([a, b]) => <div className="receipt-row" key={a}><span>{a}</span><span>{b}</span></div>)}
-            <div className="receipt-row"><b>ENTREPRENEURSHIP</b><b>THE DREAM</b></div>
-            <button className="btn" onClick={() => setReceipt(true)}>Read my story receipt</button>
-          </Reveal>
-        </section>
+        <Owner onReceipt={() => setReceipt(true)} />
 
         <section className="toolkit" id="skills" aria-labelledby="toolkit-title">
           <Reveal className="section-heading">

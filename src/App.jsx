@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Reveal from './components/Reveal.jsx';
 import Entrance from './components/Entrance.jsx';
+import Toolkit from './components/Toolkit.jsx';
 import Owner from './components/Owner.jsx';
 import CareerShelves from './components/CareerShelves.jsx';
 import { ProjectDialog, ReceiptDialog } from './components/Dialogs.jsx';
-import { img, workCards, toolkit, socials } from './data.js';
+import { img, workCards, socials } from './data.js';
 
 const STORAGE_KEY = 'thuvarakan-shop';
 
@@ -102,24 +103,7 @@ export default function App() {
 
         <Owner onReceipt={() => setReceipt(true)} />
 
-        <section className="toolkit" id="skills" aria-labelledby="toolkit-title">
-          <Reveal className="section-heading">
-            <div><span className="eyebrow">05 / TOOLS OF THE TRADE</span><h2 id="toolkit-title">What’s behind the counter.</h2></div>
-            <p>Tools for checking the interface, understanding the code and making issues easy to act on.</p>
-          </Reveal>
-          <div className="toolkit-grid">
-            {toolkit.map(([h, items]) => (
-              <Reveal as="article" className="toolkit-group" key={h}>
-                <h3>{h}</h3>
-                <ul>{items.map((i) => <li key={i}>{i}</li>)}</ul>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="report-note">
-            <span className="eyebrow">HOW I REPORT A DEFECT</span>
-            <p>Environment. Reproduction steps. Expected and actual behaviour. Severity. Annotated screenshots or a short recording. Enough context for the developer to investigate without another round of questions.</p>
-          </Reveal>
-        </section>
+        <Toolkit />
 
         <section className="learning" id="background" aria-labelledby="learning-title">
           <Reveal className="section-heading">

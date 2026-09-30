@@ -8,6 +8,7 @@ import './styles/shop-theme.css';
 import './styles/stockroom.css';
 import './styles/hero-fixes.css';
 import './styles/owner.css';
+import './styles/toolkit.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

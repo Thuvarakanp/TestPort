@@ -10,6 +10,7 @@ import './styles/hero-fixes.css';
 import './styles/owner.css';
 import './styles/toolkit.css';
 import './styles/learning.css';
+import './styles/gallery.css';
 import './styles/audit.css';
 
 createRoot(document.getElementById('root')).render(

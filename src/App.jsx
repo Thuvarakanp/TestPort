@@ -3,6 +3,7 @@ import Reveal from './components/Reveal.jsx';
 import Entrance from './components/Entrance.jsx';
 import Learning from './components/Learning.jsx';
 import Toolkit from './components/Toolkit.jsx';
+import Gallery from './components/Gallery.jsx';
 import Owner from './components/Owner.jsx';
 import CareerShelves from './components/CareerShelves.jsx';
 import { ProjectDialog, ReceiptDialog } from './components/Dialogs.jsx';
@@ -45,7 +46,7 @@ export default function App() {
       <header className="site-nav entrance-nav">
         <a className="brand" href="#entrance"><span>{theme === 'day' ? 'day shop' : 'night shop'}</span><span> / T.</span></a>
         <nav aria-label="Main navigation">
-          <a href="#story">My story</a><a href="#work">The shelves</a><a href="#skills">The toolkit</a>
+          <a href="#story">My story</a><a href="#work">The shelves</a><a href="#gallery">Gallery</a><a href="#skills">The toolkit</a>
         </nav>
       </header>
 
@@ -101,6 +102,8 @@ export default function App() {
             </Reveal>
           </div>
         </section>
+
+        <Gallery />
 
         <Owner onReceipt={() => setReceipt(true)} />
 

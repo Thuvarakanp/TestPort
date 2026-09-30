@@ -5,6 +5,7 @@ import './styles/shared.css';
 import './styles/midnight.css';
 import './styles/entrance.css';
 import './styles/shop-theme.css';
+import './styles/stockroom.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

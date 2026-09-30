@@ -64,7 +64,7 @@ export default function App() {
           </div>
         </div>
 
-        <CareerShelves />
+        <CareerShelves paused={paused} />
 
         <section className="stock" id="work">
           <Reveal className="section-heading">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Reveal from './Reveal.jsx';
-import { gallery, galleryCategories } from '../gallery.js';
+import { gallery as fallbackGallery } from '../gallery.js';
+import { useCms, DESIGN_QUERY, mapDesigns } from '../cms.js';
 
 function Tile({ item, onOpen }) {
   return (
@@ -19,6 +20,8 @@ function Tile({ item, onOpen }) {
 }
 
 export default function Gallery() {
+  const gallery = useCms(DESIGN_QUERY, mapDesigns, fallbackGallery);
+  const galleryCategories = ['All', ...new Set(gallery.map((g) => g.category))];
   const [cat, setCat] = useState('All');
   const [open, setOpen] = useState(null);
   const dlg = useRef(null);

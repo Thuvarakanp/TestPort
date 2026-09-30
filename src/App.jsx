@@ -3,11 +3,12 @@ import Reveal from './components/Reveal.jsx';
 import Entrance from './components/Entrance.jsx';
 import Learning from './components/Learning.jsx';
 import Toolkit from './components/Toolkit.jsx';
+import Work, { useWork } from './components/Work.jsx';
 import Gallery from './components/Gallery.jsx';
 import Owner from './components/Owner.jsx';
 import CareerShelves from './components/CareerShelves.jsx';
 import { ProjectDialog, ReceiptDialog } from './components/Dialogs.jsx';
-import { img, workCards, socials } from './data.js';
+import { socials } from './data.js';
 
 const STORAGE_KEY = 'thuvarakan-shop';
 
@@ -17,6 +18,7 @@ function initialTheme() {
 
 export default function App() {
   const [theme, setTheme] = useState(initialTheme);
+  const work = useWork();
   const [project, setProject] = useState(null);
   const [receipt, setReceipt] = useState(false);
   const [ringText, setRingText] = useState('Ring for assistance ◉');
@@ -64,38 +66,7 @@ export default function App() {
 
         <CareerShelves />
 
-        <section className="stock" id="work">
-          <Reveal className="section-heading">
-            <div><span className="eyebrow">03 / ON THE SHELVES</span><h2>Design. Build. Test.</h2></div>
-            <p>Work across product interfaces, visual communication and this portfolio’s own story.</p>
-          </Reveal>
-          <p className="sample-disclosure">A selection of responsibilities and contributions from my work experience.</p>
-          <div className="shelf-grid">
-            {workCards.map((c) => (
-              <Reveal as="button" className="project-card stock-card" key={c.id} onClick={() => setProject(c.id)}>
-                <div className="image-wrap">
-                  <div className={`qa-cover ${c.cover}`}>
-                    <span className="eyebrow">{c.eyebrow}</span>
-                    <strong>{c.lines[0]}<br />{c.lines[1]}</strong>
-                    <div className="cover-tags">{c.tags.map((t) => <span key={t}>{t}</span>)}</div>
-                  </div>
-                </div>
-                <div className="meta"><span>{c.company}</span><span>{c.kind}</span></div>
-                <h3>{c.title}</h3>
-                <span className="shelf-action">Explore the work</span>
-              </Reveal>
-            ))}
-            <Reveal as="button" className="project-card stock-card" onClick={() => setProject('after')}>
-              <div className="image-wrap">
-                <img className="night-gallery" src={img('store.webp')} alt="The shop at night" loading="lazy" />
-                <img className="day-gallery" src={img('store-owner-day.webp')} alt="Thuvarakan welcoming visitors to the shop in daylight" loading="lazy" />
-              </div>
-              <div className="meta"><span>04 / THIS PORTFOLIO</span><span>PERSONAL STORY</span></div>
-              <h3>Day &amp; Night</h3>
-              <span className="shelf-action">The story behind the store</span>
-            </Reveal>
-          </div>
-        </section>
+        <Work items={work} onOpen={setProject} />
 
         <Gallery />
 
@@ -154,7 +125,7 @@ export default function App() {
         <a className="replay-entry" href="#entrance">Replay entrance ↺</a>
       </div>
 
-      <ProjectDialog projectId={project} theme={theme} onClose={() => setProject(null)} />
+      <ProjectDialog item={project} theme={theme} onClose={() => setProject(null)} />
       <ReceiptDialog open={receipt} onClose={() => setReceipt(false)} />
     </>
   );

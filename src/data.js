@@ -16,11 +16,27 @@ export const projectData = {
   after: { title: 'Day & Night', type: 'Thuvarakan / Personal portfolio', intro: 'A shop, by day and by night, for a lifelong entrepreneurial ambition. This portfolio brings my career and the dream of building something of my own into the same space.', problem: 'How do graphic design, UI design, development, design consulting, UI UX engineering and my current QA role fit into one personal story?', approach: 'The store is the connecting idea. I welcome visitors at the door, share the six chapters of my career, and use the shelves and receipt to show what I carry forward.', details: 'Personal narrative · Storefront concept · Scroll-driven introduction', next: 'Keep adding real work and new chapters as my career develops.' },
 };
 
-export const workCards = [
+const cards = [
   { id: 'forma', cover: 'cover-regression', eyebrow: '01 / PRODUCT INTERFACES', lines: ['Helping people', 'get moving.'], tags: ['B2B BOOKING', 'DRIVER APPS'], company: 'SMARTZI LANKA', kind: 'UI/UX DESIGN', title: 'Taxi booking & driver apps' },
   { id: 'still', cover: 'cover-access', eyebrow: '02 / VISUAL COMMUNICATION', lines: ['A taste of', 'good design.'], tags: ['APP GRAPHICS', 'VISUAL DIRECTION'], company: 'COOKOO', kind: 'GRAPHIC CONSULTING', title: 'Design for food ordering' },
   { id: 'index', cover: 'cover-explore', eyebrow: '03 / MARKETING DESIGN', lines: ['Making the', 'message clear.'], tags: ['CYBERSECURITY', 'VISUAL CONCEPTS'], company: 'CYBERARCH', kind: 'GRAPHIC DESIGN', title: 'Communicating cybersecurity' },
+  { id: 'after', cover: 'cover-regression', eyebrow: '', lines: ['', ''], tags: [], company: '04 / THIS PORTFOLIO', kind: 'PERSONAL STORY', title: 'Day & Night', actionLabel: 'The story behind the store',
+    imageNight: '/images/store.webp', imageDay: '/images/store-owner-day.webp', imageAlt: 'The shop by day and night' },
 ];
+
+// Bundled content, used until Sanity is connected (or if it is unreachable).
+export const fallbackWork = cards.map((c) => {
+  const d = projectData[c.id];
+  const isAfter = c.id === 'after';
+  return {
+    ...c,
+    detail: {
+      type: d.type, title: d.title, intro: d.intro, problem: d.problem, approach: d.approach, details: d.details, next: d.next,
+      nextLabel: isAfter ? 'Next step' : 'Role & period',
+      footnote: isAfter ? 'The story behind this personal portfolio.' : 'Work overview based on my résumé.',
+    },
+  };
+});
 
 export const toolkit = [
   ['01 / TEST AUTOMATION', ['Playwright', 'Cypress', 'Postman', 'Selenium', 'Appium']],

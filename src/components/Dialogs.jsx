@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { projectData, receiptDetail, img } from '../data.js';
+import { receiptDetail } from '../data.js';
 
 function useDialog(open, onClose) {
   const ref = useRef(null);
@@ -18,36 +18,28 @@ function useDialog(open, onClose) {
   return { ref, onClick, onClose };
 }
 
-export function ProjectDialog({ projectId, theme, onClose }) {
-  const dlg = useDialog(Boolean(projectId), onClose);
-  const d = projectId && projectData[projectId];
-  const isAfter = projectId === 'after';
+export function ProjectDialog({ item, theme, onClose }) {
+  const dlg = useDialog(Boolean(item), onClose);
+  const d = item?.detail;
+  const art = item && (item.image || (theme === 'day' ? item.imageDay : item.imageNight));
   return (
     <dialog className="dialog" id="project-dialog" {...dlg}>
       <button className="dialog-close" onClick={onClose} aria-label="Close project">×</button>
       <div className="dialog-inner dialog-content">
         {d && (
           <>
-            {isAfter && (
-              <img
-                className="picked-up-art"
-                src={img(theme === 'day' ? 'store-owner-day.webp' : 'store-owner.webp')}
-                alt="Thuvarakan’s storefront portfolio"
-              />
-            )}
+            {art && <img className="picked-up-art" src={art} alt={item.imageAlt || d.title} />}
             <div className="picked-up-label">OFF THE SHELF / TAKE A CLOSER LOOK</div>
             <div className="eyebrow">{d.type}</div>
             <h2>{d.title}</h2>
-            <p>{d.intro}</p>
+            {d.intro && <p>{d.intro}</p>}
             <div className="dialog-grid">
-              <div><h3>The question</h3><p>{d.problem}</p></div>
-              <div><h3>The direction</h3><p>{d.approach}</p></div>
+              {d.problem && <div><h3>The question</h3><p>{d.problem}</p></div>}
+              {d.approach && <div><h3>The direction</h3><p>{d.approach}</p></div>}
             </div>
-            <h3>Scope</h3>
-            <p>{d.details}</p>
-            <h3>{isAfter ? 'Next step' : 'Role & period'}</h3>
-            <p>{d.next}</p>
-            <p className="contact-note">{isAfter ? 'The story behind this personal portfolio.' : 'Work overview based on my résumé.'}</p>
+            {d.details && (<><h3>Scope</h3><p>{d.details}</p></>)}
+            {d.next && (<><h3>{d.nextLabel}</h3><p>{d.next}</p></>)}
+            {d.footnote && <p className="contact-note">{d.footnote}</p>}
           </>
         )}
       </div>

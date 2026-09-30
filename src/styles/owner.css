@@ -115,6 +115,4 @@
 /* Day theme uses the white-suit portrait; its white backdrop multiplies into the page colour */
 .portrait-day{display:none}
 :root[data-shop="day"] .portrait-night{display:none}
-:root[data-shop="day"] .portrait-day{display:block;object-position:50% 14%;
-  -webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 44%,#000 55%,#000a 72%,transparent 100%);
-  mask-image:radial-gradient(ellipse 58% 62% at 50% 44%,#000 55%,#000a 72%,transparent 100%)}
+:root[data-shop="day"] .portrait-day{display:block;object-fit:contain;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}

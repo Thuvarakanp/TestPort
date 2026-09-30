@@ -56,3 +56,4 @@
   .ln-timeline li{grid-template-columns:42px 30px 1fr}
 }
 @media(prefers-reduced-motion:reduce){.ln-meter i,.ln-dot,.ln-chips li{transition:none}.ln-meter i.on{background:var(--l-accent)}}
+.ln-tag{display:inline-block;margin-top:14px;font:11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border:1px solid #ffffffaa;border-radius:99px;color:#fff}

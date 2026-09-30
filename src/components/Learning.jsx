@@ -3,7 +3,7 @@ import Reveal from './Reveal.jsx';
 const EDUCATION = [
   { year: '2021', title: 'B.Sc in Interactive Media', where: 'Sri Lanka Institute of Information Technology', note: 'Studies began in 2021', main: true },
   { year: '2021', title: 'Psychology & Basic Counseling', where: 'University of Peradeniya', note: 'Additional learning' },
-  { year: '2017', title: 'Six-month coding programme', where: 'Uki Coding School', note: 'Coding' },
+  { year: '2017', title: 'Six-month coding programme', where: 'Uki Coding School', note: 'Run by Yarl IT Hub' },
   { year: '2017', title: 'English for Adults', where: 'British Council', note: 'Additional learning' },
   { year: '2016', title: 'Ground Zero information security training', where: 'InfoSec, India', note: 'Additional learning' },
 ];
@@ -41,7 +41,8 @@ export default function Learning() {
           <Reveal className="ln-card ln-community">
             <div className="ln-card-head"><span className="eyebrow">COMMUNITY</span></div>
             <h3>A shared interest in building.</h3>
-            <p>Volunteer experience with Yarl IT Hub, a community supporting technology, innovation and entrepreneurship. It connects closely with my own ambition to build a business.</p>
+            <span className="ln-tag">Volunteer · Yarl IT Hub · 2015 – present</span>
+            <p>Yarl IT Hub is a not-for-profit social enterprise inspiring, supporting and nurturing technology, innovation and entrepreneurship in the community. I’ve volunteered with them since 2015. It connects closely with my own ambition to build a business.</p>
           </Reveal>
 
           <Reveal className="ln-card">

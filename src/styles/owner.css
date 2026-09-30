@@ -96,9 +96,8 @@
 /* portrait blended into the page: edges dissolve into the section background */
 .owner-grid{grid-template-columns:minmax(280px,5fr) 7fr}
 .owner-frame{aspect-ratio:4/5;background:transparent!important;box-shadow:none!important;border-radius:0;overflow:visible}
-.owner-frame img{object-fit:cover;object-position:50% 12%;
-  -webkit-mask-image:radial-gradient(ellipse 62% 60% at 50% 46%,#000 38%,#000c 58%,#0004 78%,transparent 96%);
-  mask-image:radial-gradient(ellipse 62% 60% at 50% 46%,#000 38%,#000c 58%,#0004 78%,transparent 96%)}
+
+.owner-frame img{object-fit:cover;object-position:50% 12%}
 /* in the light theme the dark studio backdrop is lifted so it melts into the cream page */
 :root[data-shop="day"] .owner-frame img{filter:brightness(1.05) contrast(1.02)}
 .owner-badge{left:6%;bottom:10%}
@@ -115,4 +114,13 @@
 /* Day theme uses the white-suit portrait; its white backdrop multiplies into the page colour */
 .portrait-day{display:none}
 :root[data-shop="day"] .portrait-night{display:none}
-:root[data-shop="day"] .portrait-day{display:block;object-fit:contain;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}
+:root[data-shop="day"] .portrait-day{display:block;object-fit:cover;object-position:50% 6%;-webkit-mask-image:none;mask-image:none}
+
+/* blend overlay: page-colour gradients laid over the photo edges (no masks, no circle) */
+.owner-frame{position:relative;isolation:isolate}
+.owner-frame::after{content:"";position:absolute;inset:-1px;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(to top,var(--o-bg) 0,var(--o-bg) 4%,transparent 38%),
+    linear-gradient(to bottom,var(--o-bg) 0,transparent 16%),
+    linear-gradient(to right,var(--o-bg) 0,transparent 22%),
+    linear-gradient(to left,var(--o-bg) 0,transparent 22%)}

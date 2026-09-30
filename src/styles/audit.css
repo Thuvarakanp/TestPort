@@ -1,0 +1,35 @@
+/* UI audit: align every section after the hero with the hero's palette and type.
+   Hero: deep green/navy grounds, cream text, Georgia-italic accent words (night #f6a66e, day #9a421e). */
+:root{--em:#f6a66e;--em-font:italic 400 1em Georgia,serif}
+:root[data-shop="day"]{--em:#9a421e}
+
+/* accent words: same serif italic as the hero headline */
+.stockroom h2 em,.owner-copy h2 em{font:var(--em-font);color:var(--em);letter-spacing:-.03em}
+.inside-note em,.ambition-note em,.ambition-signature{color:var(--em)}
+
+/* night: no more pale bands, everything stays in the hero's dark palette */
+:root:not([data-shop="day"]) .immersive-store .stock{background:#151f18;color:#ede8da}
+:root:not([data-shop="day"]) .immersive-store .stock .eyebrow,
+:root:not([data-shop="day"]) .immersive-store .stock .section-heading p,
+:root:not([data-shop="day"]) .immersive-store .stock-card .meta{color:#a3ac9f}
+:root:not([data-shop="day"]) .immersive-store .stock-card{border-bottom-color:#2c372f;box-shadow:none}
+:root:not([data-shop="day"]) .immersive-store .stock-card .image-wrap{border-color:#232e26;background:#1a241c;box-shadow:none}
+:root:not([data-shop="day"]) .stock-card h3,:root:not([data-shop="day"]) .stock-card .shelf-action{color:#ede8da}
+:root:not([data-shop="day"]) .immersive-store .store-marquee{background:var(--em);color:#1b1409}
+
+/* footer: deep hero green in both themes instead of loud yellow / pale green */
+.immersive-store .store-contact,:root[data-shop="day"] .store-contact{background:#0f1a13;color:#f1ede0}
+:root[data-shop="day"] .store-contact{background:#183b2c}
+.store-contact .eyebrow{color:#b9c4b3}
+.store-contact h2{color:#fbf7ea}
+.store-contact .availability{border-color:#f1ede0aa;color:var(--em)}
+.store-contact a{border-color:#f1ede066}
+.store-contact a:hover{color:var(--em);border-color:var(--em)}
+.store-contact .footer-bottom{border-top-color:#f1ede033;color:#b9c4b3}
+
+/* fixes from the audit pass */
+:root:not([data-shop="day"]) .immersive-store .stock .sample-disclosure{color:#a3ac9f}
+:root:not([data-shop="day"]) .immersive-store .stock .qa-cover .eyebrow{color:inherit}
+.store-contact .availability{color:#f6a66e}
+.store-contact a:hover{color:#f6a66e;border-color:#f6a66e}
+@media(max-width:700px){.store-contact{padding-bottom:150px}}

@@ -9,6 +9,7 @@ import './styles/stockroom.css';
 import './styles/hero-fixes.css';
 import './styles/owner.css';
 import './styles/toolkit.css';
+import './styles/learning.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

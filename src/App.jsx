@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Reveal from './components/Reveal.jsx';
 import Entrance from './components/Entrance.jsx';
+import Learning from './components/Learning.jsx';
 import Toolkit from './components/Toolkit.jsx';
 import Owner from './components/Owner.jsx';
 import CareerShelves from './components/CareerShelves.jsx';
@@ -105,41 +106,7 @@ export default function App() {
 
         <Toolkit />
 
-        <section className="learning" id="background" aria-labelledby="learning-title">
-          <Reveal className="section-heading">
-            <div><span className="eyebrow">06 / ALWAYS ADDING TO THE SHELVES</span><h2 id="learning-title">Learning beyond the role.</h2></div>
-            <p>Education, community and the people skills that support my work.</p>
-          </Reveal>
-          <div className="learning-grid">
-            <Reveal as="article" className="learning-card">
-              <span className="eyebrow">EDUCATION</span>
-              <h3>Interactive media &amp; code.</h3>
-              <dl>
-                <dt>B.Sc in Interactive Media</dt><dd>Sri Lanka Institute of Information Technology<br />Studies began in 2021</dd>
-                <dt>Six-month coding programme</dt><dd>Uki Coding School · 2017</dd>
-              </dl>
-              <p>Additional learning: Psychology &amp; Basic Counseling at the University of Peradeniya (2021), English for Adults at the British Council (2017), and Ground Zero information security training at InfoSec, India (2016).</p>
-            </Reveal>
-            <Reveal as="article" className="learning-card">
-              <span className="eyebrow">COMMUNITY</span>
-              <h3>A shared interest in building.</h3>
-              <p>Volunteer experience with Yarl IT Hub, a community supporting technology, innovation and entrepreneurship. It connects closely with my own ambition to build a business.</p>
-              <span className="eyebrow">WORKING WITH PEOPLE</span>
-              <ul className="people-skills">
-                {['Team management', 'Risk management', 'Negotiation', 'Conflict resolution', 'Time management', 'Teamwork'].map((s) => <li key={s}>{s}</li>)}
-              </ul>
-            </Reveal>
-            <Reveal as="article" className="learning-card language-card">
-              <span className="eyebrow">LANGUAGES</span>
-              <h3>Let’s talk.</h3>
-              <dl>
-                <dt>Tamil</dt><dd>Native and fluent</dd>
-                <dt>English</dt><dd>Professional</dd>
-                <dt>Sinhala</dt><dd>Elementary</dd>
-              </dl>
-            </Reveal>
-          </div>
-        </section>
+        <Learning />
 
         <section className="process">
           <Reveal className="section-heading">

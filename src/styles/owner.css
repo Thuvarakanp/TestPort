@@ -92,3 +92,11 @@
 }
 @media(max-width:520px){.journey{grid-template-columns:repeat(2,1fr)}.owner-stamp{width:88px;height:88px;right:-8px;top:-30px}.owner-block{inset:auto -8px -12px auto}.owner-stats dd{font-size:10px}.owner-stats div+div{padding-left:12px}}
 @media(prefers-reduced-motion:reduce){.owner-panel,.badge-dot,.owner-stamp,.owner-tabs button i{animation:none}.journey::after{transition:none;transform:scaleX(1)}.j-dot{transition:none}}
+
+/* collage portrait: landscape card that carries its own decoration */
+.owner-grid{grid-template-columns:minmax(300px,6fr) 5fr}
+.owner-frame{aspect-ratio:3/2;background:#fff;box-shadow:0 0 0 1px var(--o-line)}
+.owner-frame img{object-position:50% 50%}
+.owner-badge{left:18px;bottom:-18px}
+@media(max-width:900px){.owner-frame{aspect-ratio:3/2}.owner-badge{left:12px;bottom:-22px}}
+@media(max-width:900px){.owner-grid{grid-template-columns:1fr}}

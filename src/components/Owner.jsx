@@ -54,9 +54,8 @@ export default function Owner({ onReceipt }) {
       <div className="owner-grid">
         <Reveal className="owner-photo">
           <div className="owner-frame">
-            <img className="collage collage-day" src={img('owner-collage-day.webp')} width="1536" height="1024" loading="lazy"
-              alt="Thuvarakan resting his chin on his hand, with handwritten notes: Ideas, Experiences, Better Products; Stay curious, keep building; Build, Test, Improve, Repeat" />
-            <img className="collage collage-night" src={img('owner-collage-night.webp')} width="1536" height="1024" loading="lazy" alt="" aria-hidden="true" />
+            <img src={img('owner-studio-suit.webp')} width="1086" height="1448" loading="lazy"
+              alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" />
           </div>
           <div className="owner-badge">
             <span className="badge-dot" aria-hidden="true" />

@@ -1,0 +1,234 @@
+import { useEffect, useState } from 'react';
+import Reveal from './components/Reveal.jsx';
+import Entrance from './components/Entrance.jsx';
+import CareerShelves from './components/CareerShelves.jsx';
+import { ProjectDialog, ReceiptDialog } from './components/Dialogs.jsx';
+import { img, workCards, toolkit, receiptRows, socials } from './data.js';
+
+const STORAGE_KEY = 'thuvarakan-shop';
+
+function initialTheme() {
+  return document.documentElement.dataset.shop === 'night' ? 'night' : 'day';
+}
+
+export default function App() {
+  const [theme, setTheme] = useState(initialTheme);
+  const [paused, setPaused] = useState(false);
+  const [project, setProject] = useState(null);
+  const [receipt, setReceipt] = useState(false);
+  const [ringText, setRingText] = useState('Ring for assistance ◉');
+
+  useEffect(() => {
+    document.documentElement.dataset.shop = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    document.body.classList.toggle('paused', paused);
+    return () => document.body.classList.remove('paused');
+  }, [paused]);
+
+  const chooseTheme = (t) => {
+    setTheme(t);
+    try { localStorage.setItem(STORAGE_KEY, t); } catch {}
+  };
+
+  const ring = () => {
+    setRingText('Ding! You have my attention.');
+    document.querySelector('#contact')?.scrollIntoView({ behavior: paused ? 'instant' : 'smooth' });
+  };
+
+  return (
+    <>
+      <header className="site-nav entrance-nav">
+        <a className="brand" href="#entrance"><span>{theme === 'day' ? 'day shop' : 'night shop'}</span><span> / T.</span></a>
+        <nav aria-label="Main navigation">
+          <a href="#story">My story</a><a href="#work">The shelves</a><a href="#skills">The toolkit</a>
+        </nav>
+      </header>
+
+      <main>
+        <Entrance theme={theme} paused={paused} />
+
+        <section className="inside-note">
+          <span className="eyebrow">01 / COME ON IN</span>
+          <p>Different roles.<br />The same dream: <em>build something of my own.</em></p>
+          <div className="story-intro">My career began in graphic design. It took me through interfaces, code, consulting and UI UX engineering. Today, I work in QA. The ambition to become an entrepreneur has been there from the start.</div>
+          <a className="story-link" href="#story">Here’s how the shelves filled up</a>
+        </section>
+
+        <div className="marquee store-marquee" aria-hidden="true">
+          <div>
+            {[0, 1].flatMap((k) =>
+              ['DESIGNER’S EYE ✳', 'DEVELOPER’S UNDERSTANDING ✳', 'QA ENGINEER’S ATTENTION ✳'].map((t) => <span key={`${k}${t}`}>{t}</span>)
+            )}
+          </div>
+        </div>
+
+        <CareerShelves />
+
+        <section className="stock" id="work">
+          <Reveal className="section-heading">
+            <div><span className="eyebrow">03 / ON THE SHELVES</span><h2>Design. Build. Test.</h2></div>
+            <p>Work across product interfaces, visual communication and this portfolio’s own story.</p>
+          </Reveal>
+          <p className="sample-disclosure">A selection of responsibilities and contributions from my work experience.</p>
+          <div className="shelf-grid">
+            {workCards.map((c) => (
+              <Reveal as="button" className="project-card stock-card" key={c.id} onClick={() => setProject(c.id)}>
+                <div className="image-wrap">
+                  <div className={`qa-cover ${c.cover}`}>
+                    <span className="eyebrow">{c.eyebrow}</span>
+                    <strong>{c.lines[0]}<br />{c.lines[1]}</strong>
+                    <div className="cover-tags">{c.tags.map((t) => <span key={t}>{t}</span>)}</div>
+                  </div>
+                </div>
+                <div className="meta"><span>{c.company}</span><span>{c.kind}</span></div>
+                <h3>{c.title}</h3>
+                <span className="shelf-action">Explore the work</span>
+              </Reveal>
+            ))}
+            <Reveal as="button" className="project-card stock-card" onClick={() => setProject('after')}>
+              <div className="image-wrap">
+                <img className="night-gallery" src={img('store.webp')} alt="The shop at night" loading="lazy" />
+                <img className="day-gallery" src={img('store-owner-day.webp')} alt="Thuvarakan welcoming visitors to the shop in daylight" loading="lazy" />
+              </div>
+              <div className="meta"><span>04 / THIS PORTFOLIO</span><span>PERSONAL STORY</span></div>
+              <h3>Day &amp; Night</h3>
+              <span className="shelf-action">The story behind the store</span>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="counter" id="about">
+          <Reveal className="owner-portrait">
+            <div className="portrait-crop">
+              <img src={img('owner-studio-suit.webp')} alt="Thuvarakan wearing glasses, a dark charcoal suit and a white shirt in a studio portrait" loading="lazy" />
+            </div>
+            <span className="eyebrow">THUVARAKAN PERINPANAYAGAM / JAFFNA, SRI LANKA</span>
+          </Reveal>
+          <Reveal>
+            <span className="eyebrow">04 / MEET THE OWNER</span>
+            <h2>QA engineer today.<br />Entrepreneur<br />in the making.</h2>
+            <p>I’m Thuvarakan Perinpanayagam, a QA engineer based in Jaffna, Sri Lanka, with a background in graphic design, UI engineering and UI/UX design. Design helps me spot where an experience feels wrong. Code helps me understand why. Testing brings both perspectives together.</p>
+            <p>I work across manual and automated testing, read source code to investigate defects, and document issues with clear steps and visual evidence. For small defects, I can also contribute the fix.</p>
+            <p>That’s why this portfolio is a store. Becoming an entrepreneur has been my ambition from the beginning. This is a small expression of that dream: a place of my own, with everything I’ve learned on the shelves.</p>
+          </Reveal>
+          <Reveal className="receipt-preview">
+            <div className="eyebrow" style={{ textAlign: 'center' }}>WHAT I’VE COLLECTED ALONG THE WAY</div>
+            <h3>THUVARAKAN’S STORE</h3>
+            {receiptRows.map(([a, b]) => <div className="receipt-row" key={a}><span>{a}</span><span>{b}</span></div>)}
+            <div className="receipt-row"><b>ENTREPRENEURSHIP</b><b>THE DREAM</b></div>
+            <button className="btn" onClick={() => setReceipt(true)}>Read my story receipt</button>
+          </Reveal>
+        </section>
+
+        <section className="toolkit" id="skills" aria-labelledby="toolkit-title">
+          <Reveal className="section-heading">
+            <div><span className="eyebrow">05 / TOOLS OF THE TRADE</span><h2 id="toolkit-title">What’s behind the counter.</h2></div>
+            <p>Tools for checking the interface, understanding the code and making issues easy to act on.</p>
+          </Reveal>
+          <div className="toolkit-grid">
+            {toolkit.map(([h, items]) => (
+              <Reveal as="article" className="toolkit-group" key={h}>
+                <h3>{h}</h3>
+                <ul>{items.map((i) => <li key={i}>{i}</li>)}</ul>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="report-note">
+            <span className="eyebrow">HOW I REPORT A DEFECT</span>
+            <p>Environment. Reproduction steps. Expected and actual behaviour. Severity. Annotated screenshots or a short recording. Enough context for the developer to investigate without another round of questions.</p>
+          </Reveal>
+        </section>
+
+        <section className="learning" id="background" aria-labelledby="learning-title">
+          <Reveal className="section-heading">
+            <div><span className="eyebrow">06 / ALWAYS ADDING TO THE SHELVES</span><h2 id="learning-title">Learning beyond the role.</h2></div>
+            <p>Education, community and the people skills that support my work.</p>
+          </Reveal>
+          <div className="learning-grid">
+            <Reveal as="article" className="learning-card">
+              <span className="eyebrow">EDUCATION</span>
+              <h3>Interactive media &amp; code.</h3>
+              <dl>
+                <dt>B.Sc in Interactive Media</dt><dd>Sri Lanka Institute of Information Technology<br />Studies began in 2021</dd>
+                <dt>Six-month coding programme</dt><dd>Uki Coding School · 2017</dd>
+              </dl>
+              <p>Additional learning: Psychology &amp; Basic Counseling at the University of Peradeniya (2021), English for Adults at the British Council (2017), and Ground Zero information security training at InfoSec, India (2016).</p>
+            </Reveal>
+            <Reveal as="article" className="learning-card">
+              <span className="eyebrow">COMMUNITY</span>
+              <h3>A shared interest in building.</h3>
+              <p>Volunteer experience with Yarl IT Hub, a community supporting technology, innovation and entrepreneurship. It connects closely with my own ambition to build a business.</p>
+              <span className="eyebrow">WORKING WITH PEOPLE</span>
+              <ul className="people-skills">
+                {['Team management', 'Risk management', 'Negotiation', 'Conflict resolution', 'Time management', 'Teamwork'].map((s) => <li key={s}>{s}</li>)}
+              </ul>
+            </Reveal>
+            <Reveal as="article" className="learning-card language-card">
+              <span className="eyebrow">LANGUAGES</span>
+              <h3>Let’s talk.</h3>
+              <dl>
+                <dt>Tamil</dt><dd>Native and fluent</dd>
+                <dt>English</dt><dd>Professional</dd>
+                <dt>Sinhala</dt><dd>Elementary</dd>
+              </dl>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="process">
+          <Reveal className="section-heading">
+            <div><span className="eyebrow">07 / BEHIND THE COUNTER</span><h2>The way I see a product.</h2></div>
+            <button className="bell" onClick={ring}>{ringText}</button>
+          </Reveal>
+          <div className="process-list">
+            {[
+              ['01 / THE DESIGNER', 'Does it make sense?', 'I look for usability, visual and accessibility issues, including flows that technically work but leave people stuck.'],
+              ['02 / THE DEVELOPER', 'Can it work in practice?', 'I read source code, follow state changes and investigate asynchronous behaviour. Small fixes can become a pull request as well as a bug report.'],
+              ['03 / THE QA ENGINEER', 'What happens when…?', 'I combine exploratory testing with repeatable automation, stable selectors and clear assertions. The findings need to be understandable and reproducible.'],
+            ].map(([s, h, p]) => (
+              <Reveal as="article" className="process-item" key={s}><span>{s}</span><h3>{h}</h3><p>{p}</p></Reveal>
+            ))}
+          </div>
+        </section>
+
+        <footer className="store-contact" id="contact">
+          <span className="eyebrow">08 / THE NEXT CHAPTER</span>
+          <h2>Still learning.<br />Still building.<br />Still dreaming bigger.</h2>
+          <div className="contact-line">
+            <div>
+              <span className="availability">OPEN TO QA ROLES</span>
+              <p className="role-interest">Manual, automation or hybrid QA.<br />Interested in remote or hybrid product teams where design, development and QA work together.</p>
+            </div>
+            <div className="direct-contact">
+              <a href="mailto:thuvarakanmx@gmail.com">thuvarakanmx@gmail.com</a>
+              <a href="tel:+94770322868">+94 77 032 2868</a>
+              <span>Jaffna, Sri Lanka</span>
+            </div>
+          </div>
+          <nav className="social-links" aria-label="Professional profiles">
+            {socials.map(([n, u]) => <a key={n} href={u} target="_blank" rel="noopener noreferrer">{n}</a>)}
+          </nav>
+          <div className="footer-bottom">
+            <span>THUVARAKAN / DAY SHOP &amp; NIGHT SHOP</span>
+            <span>SIX ROLES. ONE DREAM. MORE TO COME.</span>
+            <a href="#">Back to the top ↑</a>
+          </div>
+        </footer>
+      </main>
+
+      <div className="shop-switch" role="group" aria-label="Shop appearance">
+        <button type="button" aria-pressed={theme === 'day'} onClick={() => chooseTheme('day')}><span aria-hidden="true">☀</span> Day Shop</button>
+        <button type="button" aria-pressed={theme === 'night'} onClick={() => chooseTheme('night')}><span aria-hidden="true">☾</span> Night Shop</button>
+      </div>
+      <div className="floating-note">
+        <a className="replay-entry" href="#entrance">Replay entrance ↺</a>
+        <button className="motion-toggle" aria-pressed={paused} onClick={() => setPaused((p) => !p)}>Motion: {paused ? 'off' : 'on'}</button>
+      </div>
+
+      <ProjectDialog projectId={project} theme={theme} onClose={() => setProject(null)} />
+      <ReceiptDialog open={receipt} onClose={() => setReceipt(false)} />
+    </>
+  );
+}

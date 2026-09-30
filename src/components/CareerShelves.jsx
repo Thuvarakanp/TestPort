@@ -52,21 +52,43 @@ export default function CareerShelves({ paused }) {
   return (
     <section className="career-stock stockroom" id="story" aria-labelledby="story-title">
       <div className="stock-track" ref={trackRef}>
-        <div className="stock-sticky">
+        <div
+          className="stock-sticky"
+          onKeyDown={(e) => {
+            if (selectedIdx === null) return;
+            if (e.key === 'ArrowRight' && selectedIdx < landed - 1) setPicked(selectedIdx + 1);
+            if (e.key === 'ArrowLeft' && selectedIdx > 0) setPicked(selectedIdx - 1);
+          }}
+        >
           <div className="stock-side">
             <span className="eyebrow">02 / HOW THE SHELVES FILLED UP</span>
             <h2 id="story-title">Six chapters.<br /><em>One shop.</em></h2>
-            <div className="delivery" aria-hidden="true">
-              <span>{String(landed).padStart(2, '0')} / 0{TOTAL}</span>
-              <div className="delivery-bar"><i style={{ width: `${(landed / TOTAL) * 100}%` }} /></div>
+            <div className="rail" role="group" aria-label="Career timeline">
+              <span className="rail-line" aria-hidden="true"><i style={{ width: `${selectedIdx === null ? 0 : (selectedIdx / (TOTAL - 1)) * 100}%` }} /></span>
+              {careerShelves.map((c, i) => (
+                <button
+                  key={c.n}
+                  type="button"
+                  className={`rail-dot${i <= (selectedIdx ?? -1) ? ' reached' : ''}${selectedIdx === i ? ' active' : ''}`}
+                  disabled={i >= landed}
+                  onClick={() => setPicked(i)}
+                  aria-label={`Go to shelf ${c.n}: ${c.role}`}
+                >
+                  <span className="rail-year">{c.year}</span>
+                </button>
+              ))}
             </div>
 
             <div className="stock-detail" aria-live="polite">
               {sel ? (
                 <div key={sel.n} className="stock-detail-inner">
+                  <span className="detail-ghost" aria-hidden="true">{sel.n}</span>
                   <div className="detail-head">
-                    <span>SHELF {sel.n}</span>
-                    <span>{sel.period}{sel.current && <em className="now-label">CURRENT</em>}</span>
+                    <span>SHELF {sel.n} · {sel.period}{sel.current && <em className="now-label">CURRENT</em>}</span>
+                    <span className="detail-nav">
+                      <button type="button" onClick={() => setPicked(selectedIdx - 1)} disabled={selectedIdx === 0} aria-label="Previous shelf">←</button>
+                      <button type="button" onClick={() => setPicked(selectedIdx + 1)} disabled={selectedIdx >= landed - 1} aria-label="Next shelf">→</button>
+                    </span>
                   </div>
                   <h3>{sel.role}</h3>
                   <p className="detail-company">{sel.company}</p>
@@ -98,6 +120,7 @@ export default function CareerShelves({ paused }) {
                   aria-label={`Shelf ${s.n}: ${s.role}, ${s.company}`}
                   onClick={() => setPicked(i)}
                 >
+                  <span className="card-ghost" aria-hidden="true">{s.n}</span>
                   <span className="card-top">
                     <span className="card-n">{s.n}</span>
                     {s.current ? <span className="card-now">NOW</span> : <span className="card-period">{s.period}</span>}
@@ -105,7 +128,9 @@ export default function CareerShelves({ paused }) {
                   <span className="card-bottom">
                     <span className="card-role">{s.role}</span>
                     <span className="card-company">{s.company}</span>
+                    <span className="card-chip">{s.takeaway}</span>
                   </span>
+                  <span className="card-arrow" aria-hidden="true">↗</span>
                 </button>
               );
             })}

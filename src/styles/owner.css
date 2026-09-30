@@ -105,3 +105,5 @@
 @media(max-width:900px){.owner-grid{grid-template-columns:1fr}.owner-frame{aspect-ratio:1/1}.owner-photo{margin-bottom:34px}.owner-badge{left:4%;bottom:-34px}}
 .owner-stamp{right:2%;top:-14px}
 @media(max-width:900px){.owner-stamp{right:4px;top:-18px;width:92px;height:92px}}
+.owner-stamp{width:168px;height:168px;right:-8px;top:-34px;padding:6px}
+@media(max-width:900px){.owner-stamp{width:124px;height:124px;right:0;top:-26px}}

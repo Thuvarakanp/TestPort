@@ -27,7 +27,13 @@ build command `npm run build`, output directory `dist`. No environment variables
 
 The **Gallery** and **On the shelves** sections read from Sanity. Without configuration the site uses the bundled content in `src/data.js` and `src/gallery.js`, so it always works.
 
-### One-time setup
+### Setup status
+- Sanity project **Portfolio** (`ijkecloq`), dataset `production`, is created and seeded with the current Work cards and Gallery designs (published).
+- CORS allows `http://localhost:5173` and `https://*.vercel.app`. Add your own domain in sanity.io/manage → API → CORS origins if you use one.
+- Remaining: add `VITE_SANITY_PROJECT_ID=ijkecloq` (and `VITE_SANITY_DATASET=production`) in Vercel → Project → Settings → Environment Variables, then redeploy.
+- Studio: `cd studio && npm install && npm run dev` (localhost:3333), or `npm run deploy` to host it at `<name>.sanity.studio`.
+
+### Setup from scratch (other project)
 1. Create a project at https://www.sanity.io/manage (free plan is fine) and note the **Project ID**.
 2. In the project settings, **API → CORS origins**, add your Vercel domain and `http://localhost:5173` (no credentials needed, the dataset can stay public).
 3. Studio: `cd studio && cp .env.example .env`, put the Project ID in `.env`, then `npm install` and `npm run dev`. Log in with `npx sanity login` first if asked.

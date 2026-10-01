@@ -19,6 +19,8 @@ export const work = defineType({
       description: 'Optional. If empty, the coloured cover below is shown instead.',
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
+    defineField({ name: 'imageNight', title: 'Night image (optional)', type: 'image', group: 'card', options: { hotspot: true }, description: 'Use with the Day image to show a different picture in each theme. Overrides the card image.' }),
+    defineField({ name: 'imageDay', title: 'Day image (optional)', type: 'image', group: 'card', options: { hotspot: true } }),
     defineField({
       name: 'cover', title: 'Cover colour (used when there is no image)', type: 'string', group: 'card', initialValue: 'cover-regression',
       options: { list: [

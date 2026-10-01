@@ -31,12 +31,12 @@ export function useCms(query, map, fallback) {
   return data;
 }
 
-export const WORK_QUERY = `*[_type=="work" && !(_id in path("drafts.**"))]|order(order asc){
+export const WORK_QUERY = `*[_type=="work"]|order(order asc){
   _id,title,company,kind,cover,eyebrow,line1,line2,tags,intro,problem,approach,details,next,nextLabel,footnote,actionLabel,
-  "image":image.asset->url,"imageAlt":image.alt
+  "image":image.asset->url,"imageAlt":image.alt,"imageDay":imageDay.asset->url,"imageNight":imageNight.asset->url
 }`;
 
-export const DESIGN_QUERY = `*[_type=="design" && !(_id in path("drafts.**"))]|order(order asc){
+export const DESIGN_QUERY = `*[_type=="design"]|order(order asc){
   _id,title,category,year,project,blurb,color,ink,
   "src":image.asset->url,"ratio":image.asset->metadata.dimensions.aspectRatio,"alt":image.alt
 }`;
@@ -45,7 +45,8 @@ export const mapWork = (rows) =>
   rows.map((r) => ({
     id: r._id, cover: r.cover || 'cover-regression', eyebrow: r.eyebrow || '', lines: [r.line1 || '', r.line2 || ''], tags: r.tags || [],
     company: r.company || '', kind: r.kind || '', title: r.title, actionLabel: r.actionLabel || 'Explore the work',
-    image: r.image ? sized(r.image, 900) : null, imageAlt: r.imageAlt || r.title,
+    image: r.image ? sized(r.image, 900) : null, imageDay: r.imageDay ? sized(r.imageDay, 900) : null, imageNight: r.imageNight ? sized(r.imageNight, 900) : null,
+    imageAlt: r.imageAlt || r.title,
     detail: {
       type: [r.company, r.kind].filter(Boolean).join(' / '), title: r.title, intro: r.intro, problem: r.problem, approach: r.approach,
       details: r.details, next: r.next, nextLabel: r.nextLabel || 'Role & period', footnote: r.footnote || 'Work overview based on my résumé.',
